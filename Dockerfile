@@ -1,9 +1,9 @@
-ARG BASE_VERSION=3.8.2-alpine3.11
-FROM python:${BASE_VERSION}
+ARG ALPINE_VERSION=3.8.2-alpine3.11
+FROM python:${ALPINE_VERSION}
 
 # set version label
 ARG MYLAR_COMMIT=v0.3.0
-LABEL version ${BASE_VERSION}_${MYLAR_COMMIT}
+LABEL version ${ALPINE_VERSION}_${MYLAR_COMMIT}
 
 RUN \
 echo "**** install system packages ****" && \
