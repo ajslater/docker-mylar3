@@ -1,0 +1,10 @@
+version: "3.7"
+services:
+    mylar:
+        env_file: env
+        build: .
+        image: ajslater/mylar
+        container_name: mylar
+        ports:
+            - "8090:8090"
+        command: python3 /app/mylar/Mylar.py --nolaunch --datadir /config/mylar
