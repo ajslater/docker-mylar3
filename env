@@ -1,4 +1,4 @@
 REPO=ajslater/mylar3
 IMAGE=ajslater/mylar3
-ALPINE_VERSION=3.8.2-alpine3.1
+ALPINE_VERSION=3.8.2-alpine3.11
 PKG_VERSION=v0.3.0
