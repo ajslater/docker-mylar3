@@ -2,8 +2,8 @@ ARG ALPINE_VERSION
 FROM python:${ALPINE_VERSION}
 
 # set version label
-ARG MYLAR_COMMIT
-LABEL version ${ALPINE_VERSION}_${MYLAR_COMMIT}
+ARG PKG_VERSION
+LABEL version ${ALPINE_VERSION}_${PKG_VERSION}
 
 RUN \
 echo "**** install system packages ****" && \
@@ -24,7 +24,7 @@ echo "**** install system packages ****" && \
 # docker host over /app/mylar.
 RUN echo "**** install app ****" && \
  git config --global advice.detachedHead false && \
- git clone https://github.com/mylar3/mylar3.git --depth 1 --branch ${MYLAR_COMMIT} --single-branch /app/mylar
+ git clone https://github.com/mylar3/mylar3.git --depth 1 --branch ${PKG_VERSION} --single-branch /app/mylar
 
 RUN echo "**** install requirements ****" && \
  pip3 install --no-cache-dir -U -r /app/mylar/requirements.txt && \
