@@ -5,7 +5,7 @@ executors:
 parameters:
   image_archive:
     type: string
-    default: image.tar
+    default: "image.tar"
 
 jobs:
   build:
@@ -27,7 +27,7 @@ jobs:
     parameters:
       tmp_workspace:
         type: string
-        default: /tmp/workspace
+        default: "/tmp/workspace"
     steps:
       - attach_workspace:
           at: << parameters.tmp_workspace >>
