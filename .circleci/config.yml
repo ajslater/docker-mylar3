@@ -5,6 +5,8 @@ executors:
 jobs:
   build:
     executor: docker-publisher
+    environment:
+        IMAGE_ARCHIVE: ./image.tar
     steps:
       - checkout
       - run:
@@ -12,19 +14,22 @@ jobs:
           command: ./build.sh
       - run:
           name: Archive Docker image
-          command: ./ci/archive-image.sh
+          command: ./ci/archive-image.sh $IMAGE_ARCHIVE
       - persist_to_workspace:
           root: .
           paths:
-            - ./image.tar
+            - $IMAGE_ARCHIVE
   deploy:
     executor: docker-publisher
+    environment:
+        TMP_WORKSPACE: /tmp/workspace
+        IMAGE_ARCHIVE: image.tar
     steps:
       - attach_workspace:
-          at: /tmp/workspace
+          at: $TMP_WORKSPACE
       - run:
           name: Load archive Docker image
-          command: ./ci/load-image.sh /tmp/workspace
+          command: docker load -i "$TMP_WORKSPACE/$IMAGE_ARCHIVE"
       - run:
           name: Publish Docker Image to Docker Hub
           command: ./tag-and-push.sh
