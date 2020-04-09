@@ -3,7 +3,7 @@ executors:
     docker-publisher:
         machine: true
 jobs:
-  - build:
+  build:
     executor: docker-publisher
     steps:
       - checkout
@@ -17,7 +17,7 @@ jobs:
         root: .
         paths:
             - ./image.tar
-  - deploy:
+  deploy:
     executor: docker-publisher
     steps:
       - attach_workspace:
