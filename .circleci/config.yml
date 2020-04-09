@@ -11,17 +11,17 @@ jobs:
   build:
     executor: docker-publisher
     steps:
-      - checkout
-      - run:
-          name: Build Mylar
-          command: ./build.sh
-      - run:
-          name: Archive Docker image
-          command: ./ci/archive-image.sh ./<< pipeline.parameters.image_archive >>
-      - persist_to_workspace:
-          root: .
-          paths:
-            - ./<< pipeline.parameters.image_archive >>
+    - checkout
+    - run:
+        name: Build Mylar
+        command: ./build.sh
+    - run:
+        name: Archive Docker image
+        command: ./ci/archive-image.sh ./<< pipeline.parameters.image_archive >>
+    - persist_to_workspace:
+        root: .
+        paths:
+        - ./<< pipeline.parameters.image_archive >>
   deploy:
     executor: docker-publisher
     parameters:
@@ -29,22 +29,23 @@ jobs:
         type: string
         default: "/tmp/workspace"
     steps:
-      - attach_workspace:
-          at: << parameters.tmp_workspace >>
-      - run:
-          name: Load archive Docker image
-          command: docker load -i "<< parameters.tmp_workspace >>/<< pipeline.parameters.image_archive >>"
-      - run:
-          name: Publish Docker Image to Docker Hub
-          command: ./tag-and-push.sh
+    - attach_workspace:
+        at: << parameters.tmp_workspace >>
+    - run:
+        name: Load archive Docker image
+        command: docker load -i "<< parameters.tmp_workspace >>/<< pipeline.parameters.image_archive >>"
+    - run:
+        name: Publish Docker Image to Docker Hub
+        command: ./tag-and-push.sh
 
 workflows:
+  version: 2.1
   build-deploy:
     jobs:
-      - build
-      - deploy:
-          requires:
-            - build
-          filters:
-            branches:
-                only: master
+    - build
+    - deploy:
+        requires:
+        - build
+        filters:
+          branches:
+            only: master
