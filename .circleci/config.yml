@@ -2,12 +2,13 @@ version: 2.1
 executors:
     docker-publisher:
         machine: true
+parameters:
+  image_archive:
+    type: string
+    default: image.tar
+
 jobs:
-  parameters:
-    image_archive:
-      type: string
-      default: image.tar
-  build:
+ build:
     executor: docker-publisher
     steps:
       - checkout
@@ -23,14 +24,16 @@ jobs:
             - ./<< parameters.image_archive >>
   deploy:
     executor: docker-publisher
-    environment:
-        TMP_WORKSPACE: /tmp/workspace
+    parameters:
+      tmp_workspace:
+        type: string
+        default: /tmp/workspace
     steps:
       - attach_workspace:
-          at: $TMP_WORKSPACE
+          at: << parameters.tmp_workspace >>
       - run:
           name: Load archive Docker image
-          command: docker load -i "$TMP_WORKSPACE/<< parameters.image_archive >>"
+          command: docker load -i "<< parameters.tmp_workspace >>/<< parameters.image_archive >>"
       - run:
           name: Publish Docker Image to Docker Hub
           command: ./tag-and-push.sh
@@ -45,4 +48,3 @@ workflows:
           filters:
             branches:
                 only: master
-
