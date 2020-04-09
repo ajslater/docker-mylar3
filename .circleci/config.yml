@@ -8,7 +8,7 @@ parameters:
     default: image.tar
 
 jobs:
- build:
+  build:
     executor: docker-publisher
     steps:
       - checkout
