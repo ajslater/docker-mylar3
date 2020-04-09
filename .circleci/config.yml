@@ -32,14 +32,14 @@ jobs:
         default: "/tmp/workspace"
     steps:
     - attach_workspace:
-        at: / # << parameters.tmp_workspace >>
+        at: . # << parameters.tmp_workspace >>
     - run:
         name: Load archive Docker image
         # command: docker load -i "<< parameters.tmp_workspace >>/<< pipeline.parameters.image_archive >>"
-        command: docker load -i "/<< pipeline.parameters.image_archive >>"
+        command: docker load -i "./<< pipeline.parameters.image_archive >>"
     - run:
         name: Publish Docker Image to Docker Hub
-        command: /tag-and-push.sh
+        command: ./tag-and-push.sh
 
 workflows:
   version: 2.1
