@@ -4,9 +4,9 @@ executors:
         machine: true
 jobs:
   parameters:
-      image_archive:
-          type: string
-          default: image.tar
+    image_archive:
+      type: string
+      default: image.tar
   build:
     executor: docker-publisher
     steps:
