@@ -1,8 +1,42 @@
 version: 2.1
+executors:
+    docker-publisher:
+        machine: true
 jobs:
-  build:
-    machine: true
+  - build:
+    executor: docker-publisher
     steps:
       - checkout
-      - run: ./build.sh
-      - run: ./tag-and-push.sh
+      - run:
+          name: Build Mylar
+          command: ./build.sh
+      - run:
+          name: Archive Docker image
+          command: ./ci/archive-image.sh
+      - presist_to_workspace:
+        root: .
+        paths:
+            - ./image.tar
+  - deploy:
+    executor: docker-publisher
+    steps:
+      - attach_workspace:
+          at: /tmp/workspace
+      - run:
+          name: Load archive Docker image
+          command: ./ci/load-image.sh /tmp/workspace
+      - run:
+          name: Publish Docker Image to Docker Hub
+          command: ./tag-and-push.sh
+
+workflows:
+  build-deploy:
+    jobs:
+      - build:
+      - deploy:
+        requires:
+            - build
+        filters:
+            branches:
+                only: master
+
