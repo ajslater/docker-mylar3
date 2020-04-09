@@ -32,7 +32,7 @@ jobs:
 workflows:
   build-deploy:
     jobs:
-      - build:
+      - build
       - deploy:
         requires:
             - build
