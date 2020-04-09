@@ -8,26 +8,26 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Build Mylar
-          command: ./build.sh
+        name: Build Mylar
+        command: ./build.sh
       - run:
-          name: Archive Docker image
-          command: ./ci/archive-image.sh
-      - presist_to_workspace:
+        name: Archive Docker image
+        command: ./ci/archive-image.sh
+      - persist_to_workspace:
         root: .
         paths:
-            - ./image.tar
+          - ./image.tar
   deploy:
     executor: docker-publisher
     steps:
       - attach_workspace:
-          at: /tmp/workspace
+        at: /tmp/workspace
       - run:
-          name: Load archive Docker image
-          command: ./ci/load-image.sh /tmp/workspace
+        name: Load archive Docker image
+        command: ./ci/load-image.sh /tmp/workspace
       - run:
-          name: Publish Docker Image to Docker Hub
-          command: ./tag-and-push.sh
+        name: Publish Docker Image to Docker Hub
+        command: ./tag-and-push.sh
 
 workflows:
   build-deploy:
