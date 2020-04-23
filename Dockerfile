@@ -8,7 +8,7 @@ LABEL version ${ALPINE_VERSION}_${PKG_VERSION}
 RUN \
 echo "**** install system packages ****" && \
  apk add --no-cache \
- git=2.24.1-r0 \
+ git=2.24.3-r0 \
  # cfscrape dependecies
  nodejs=12.15.0-r1 \
  # unrar-cffi & Pillow dependencies
