@@ -3,7 +3,7 @@ services:
     mylar:
         env_file: env
         build: .
-        image: ajslater/mylar
+        image: ajslater/mylar3
         container_name: mylar
         ports:
             - "8090:8090"
