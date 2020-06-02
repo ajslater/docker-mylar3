@@ -3,7 +3,7 @@ FROM python:${ALPINE_VERSION} as builder
 
 # set version label
 ARG PKG_VERSION
-LABEL version ${ALPINE_VERSION}_mylar-${PKG_VERSION}_builder
+LABEL version python${ALPINE_VERSION}_mylar-${PKG_VERSION}_builder
 
 RUN \
 echo "**** install build system packages ****" && \
@@ -30,7 +30,7 @@ RUN echo "**** install & build python requirements ****" && \
 # Multi stage build
 
 FROM python:${ALPINE_VERSION}
-LABEL version ${ALPINE_VERSION}_mylar-${PKG_VERSION}
+LABEL version python${ALPINE_VERSION}_mylar-${PKG_VERSION}
 
 RUN \
 echo "**** install runtime system packages ****" && \
