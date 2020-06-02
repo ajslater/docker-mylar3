@@ -35,6 +35,8 @@ LABEL version python${ALPINE_VERSION}_mylar-${PKG_VERSION}
 RUN \
 echo "**** install runtime system packages ****" && \
  apk add --no-cache \
+ # mylar version detection uses git because it isn't packaged :o
+ git=2.24.3-r0 \
  # cfscrape dependecies
  nodejs=12.15.0-r1 \
  # unrar-cffi dependancy
