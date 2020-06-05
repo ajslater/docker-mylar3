@@ -14,7 +14,7 @@ echo "**** install build system packages ****" && \
    # unar-cffi build dependencies
    libffi-dev=3.3-r2 \
    # Pillow build dependencies
-   jpeg-dev=9-r0 \
+   jpeg-dev=9d-r0 \
    zlib-dev=1.2.11-r3
 
 # For development work I reccomend mounting a full git repo from the
@@ -42,7 +42,7 @@ echo "**** install runtime system packages ****" && \
  # unrar-cffi dependancy
  libffi=3.3-r2 \
  # Pillow dependencies
- jpeg=9-r0 \
+ jpeg=9d-r0 \
  zlib=1.2.11-r3
 
 RUN echo "**** copy pre-built python requirements ***"
