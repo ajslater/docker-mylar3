@@ -8,14 +8,14 @@ LABEL version python${ALPINE_VERSION}_mylar-${PKG_VERSION}_builder
 RUN \
 echo "**** install build system packages ****" && \
  apk add --no-cache \
-   git=2.24.3-r0 \
+   git=2.26.2-r0 \
    # unrar-cffi & Pillow build dependencies
-   build-base=0.5-r1 \
+   build-base=0.5-r2 \
    # unar-cffi build dependencies
-   libffi-dev=3.2.1-r6 \
+   libffi-dev=3.3-r2 \
    # Pillow build dependencies
-   zlib-dev=1.2.11-r3 \
-   jpeg-dev=8-r6
+   jpeg-dev=9d-r0 \
+   zlib-dev=1.2.11-r3
 
 # For development work I reccomend mounting a full git repo from the
 # docker host over /app/mylar.
@@ -36,13 +36,13 @@ RUN \
 echo "**** install runtime system packages ****" && \
  apk add --no-cache \
  # mylar version detection uses git because it isn't packaged :o
- git=2.24.3-r0 \
+ git=2.26.2-r0 \
  # cfscrape dependecies
- nodejs=12.15.0-r1 \
+ nodejs=12.17.0-r0 \
  # unrar-cffi dependancy
- libffi=3.2.1-r6 \
+ libffi=3.3-r2 \
  # Pillow dependencies
- jpeg=8-r6 \
+ jpeg=9d-r0 \
  zlib=1.2.11-r3
 
 RUN echo "**** copy pre-built python requirements ***"
