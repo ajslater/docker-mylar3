@@ -1,5 +1,6 @@
 # Mylar Docker Image
-Mylar is an automated Comic Book downloader and organizer (cbr/cbz) for use with SABnzbd, NZBGet and torrents.
+Mylar is an automated Comic Book manager: https://github.com/mylar3/mylar3
+This is a docker image for it.
 
 # Usage
 Here are some example snippets to help you get started creating a container from this image.
@@ -36,7 +37,7 @@ services:
 
 ## Support Info
 - Shell access whilst the container is running:
-    - docker exec -it mylar /bin/bash
+    - docker exec -it mylar /bin/sh
 - To monitor the logs of the container in realtime:
     - docker logs -f mylar
 - Container version number
