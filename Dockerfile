@@ -38,7 +38,7 @@ echo "**** install runtime system packages ****" && \
  # mylar version detection uses git because it isn't packaged :o
  git=2.26.2-r0 \
  # cfscrape dependecies
- nodejs=12.17.0-r0 \
+ nodejs=12.18.3-r0 \
  # unrar-cffi dependancy
  libffi=3.3-r2 \
  # Pillow dependencies
