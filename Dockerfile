@@ -32,6 +32,13 @@ RUN echo "**** install & build python requirements ****" && \
 FROM python:${ALPINE_VERSION}
 LABEL version python${ALPINE_VERSION}_mylar-${PKG_VERSION}
 
+RUN echo "*** UID/GID Init. TODO move to a base image ***"
+COPY etc/cont-init.d /etc/
+RUN apk add --no-cache shadow
+RUN echo "*** create default user ***" && \
+  adduser --uid 911 --home /config --shell /bin/false --disabled-password abc && \
+  usermod -G users abc
+
 RUN \
 echo "**** install runtime system packages ****" && \
  apk add --no-cache \
@@ -54,4 +61,5 @@ COPY --from=builder /app/mylar /app/mylar
 # ports and volumes
 VOLUME /config /comics /downloads
 EXPOSE 8090
+USER abc
 CMD ["python3", "/app/mylar/Mylar.py", "--nolaunch", "--quiet", "--datadir", "/config/mylar"]
