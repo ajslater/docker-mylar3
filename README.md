@@ -11,6 +11,8 @@ Here are some example snippets to help you get started creating a container from
 docker create \
   --name=mylar \
   -p 8090:8090 \
+  -e PUID=501
+  -e PGID=20
   -v <path to data>:/config \
   -v <comics-folder>:/comics \
   -v <downloads-folder>:/downloads \
@@ -34,6 +36,13 @@ services:
       ports:
           - 8090:8090
 ```
+
+## Environment Variables
+
+- PUID: Sets the UID for the default user on startup
+- PGID: Sets the GID for the default user on startup
+
+Setting TZ and TIMEZONE also helps some programs display correct times.
 
 ## Support Info
 - Shell access whilst the container is running:
