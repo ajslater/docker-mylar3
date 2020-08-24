@@ -1,9 +1,5 @@
-ARG ALPINE_VERSION
-FROM python:${ALPINE_VERSION} as builder
-
-# set version label
-ARG PKG_VERSION
-LABEL version python${ALPINE_VERSION}_mylar-${PKG_VERSION}_builder
+ARG BASE_VERSION
+FROM ajslater/python-alpine:${BASE_VERSION} as builder
 
 RUN \
 echo "**** install build system packages ****" && \
@@ -19,6 +15,7 @@ echo "**** install build system packages ****" && \
 
 # For development work I reccomend mounting a full git repo from the
 # docker host over /app/mylar.
+ARG PKG_VERSION
 RUN echo "**** copy shallow app from git ****" && \
  git config --global advice.detachedHead false && \
  git clone https://github.com/mylar3/mylar3.git --depth 1 --branch ${PKG_VERSION} --single-branch /app/mylar
@@ -29,15 +26,8 @@ RUN echo "**** install & build python requirements ****" && \
 
 # Multi stage build
 
-FROM python:${ALPINE_VERSION}
-LABEL version python${ALPINE_VERSION}_mylar-${PKG_VERSION}
-
-RUN echo "*** UID/GID Init. TODO move to a base image ***"
-COPY etc/cont-init.d /etc/
-RUN apk add --no-cache shadow
-RUN echo "*** create default user ***" && \
-  adduser --uid 911 --home /config --shell /bin/false --disabled-password abc && \
-  usermod -G users abc
+FROM ajslater/python-alpine:${BASE_VERSION}
+LABEL version python${BASE_VERSION}_mylar-${PKG_VERSION}
 
 RUN \
 echo "**** install runtime system packages ****" && \
@@ -57,9 +47,9 @@ COPY --from=builder /usr/local/lib/python3.8/site-packages /usr/local/lib/python
 
 RUN echo "*** copy app ***"
 COPY --from=builder /app/mylar /app/mylar
+COPY cmd.sh .
 
 # ports and volumes
-VOLUME /config /comics /downloads
+VOLUME /config /comics /downloads /data
 EXPOSE 8090
-USER abc
-CMD ["python3", "/app/mylar/Mylar.py", "--nolaunch", "--quiet", "--datadir", "/config/mylar"]
+CMD ["./cmd.sh"]
