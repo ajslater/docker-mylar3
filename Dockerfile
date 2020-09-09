@@ -27,7 +27,7 @@ RUN echo "**** install & build python requirements ****" && \
 # Multi stage build
 
 FROM ajslater/python-alpine:${BASE_VERSION}
-LABEL version python${BASE_VERSION}_mylar-${PKG_VERSION}
+LABEL version mylar-${PKG_VERSION}
 
 RUN \
 echo "**** install runtime system packages ****" && \
