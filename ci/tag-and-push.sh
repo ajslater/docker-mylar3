@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 source ./env
-VERSION=mylar-${PKG_VERSION}
+VERSION=${PKG_VERSION}
 TAG=$VERSION-$(echo "$CIRCLE_SHA1" | head -c 7)
 docker tag $IMAGE "$IMAGE:$TAG"
 docker tag $IMAGE $IMAGE:latest
