@@ -13,8 +13,6 @@ echo "**** install build system packages ****" && \
    jpeg-dev=9d-r0 \
    zlib-dev=1.2.11-r3
 
-# For development work I reccomend mounting a full git repo from the
-# docker host over /app/mylar.
 ARG PKG_VERSION
 RUN echo "**** copy shallow app from git ****" && \
  git config --global advice.detachedHead false && \
@@ -46,6 +44,8 @@ RUN echo "**** copy pre-built python requirements ***"
 COPY --from=builder /usr/local/lib/python3.8/site-packages /usr/local/lib/python3.8/site-packages
 
 RUN echo "*** copy app ***"
+# For development work I reccomend mounting a full git repo from the
+# docker host over /app/mylar.
 COPY --from=builder /app/mylar /app/mylar
 COPY cmd.sh .
 
