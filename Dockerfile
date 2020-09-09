@@ -30,7 +30,7 @@ LABEL version ${PKG_VERSION}
 RUN \
 echo "**** install runtime system packages ****" && \
  apk add --no-cache \
- # mylar version detection uses git because it isn't packaged :o
+ # mylar version detection uses git because it isn't packaged
  git=2.26.2-r0 \
  # cfscrape dependecies
  nodejs=12.18.3-r0 \
