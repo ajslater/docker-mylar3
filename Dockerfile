@@ -31,7 +31,6 @@ echo "**** install build system packages ****" && \
    jpeg-dev=9d-r0 \
    zlib-dev=1.2.11-r3 && \
  pip3 install --no-cache-dir -U -r /app/mylar/requirements.txt && \
- pip3 install --no-cache-dir feedparser==5.2.1  && \
  apk del --purge build-dependencies
 
 COPY cmd.sh .
