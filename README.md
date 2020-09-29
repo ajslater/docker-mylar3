@@ -44,11 +44,11 @@ services:
 
 Setting TZ and TIMEZONE also helps some programs display correct times.
 
-## Running the mylar3 development branch
+## Running the Mylar development branch
 
 Mylar is run in production the exact same way its run in development. This makes it very easy to run development branches of Mylar by mounting custom Mylar source code over the docker image's `/app` directory.
 
-### Clone the mylar source to your host machine
+### Clone the Mylar source to your host machine
 ```sh
 $ cd /home/sstrange/code/
 $ git clone git@github.com:mylar3/mylar3.git
