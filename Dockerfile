@@ -16,7 +16,7 @@ RUN \
 echo "**** install build system packages ****" && \
  apk add --no-cache \
  # cfscrape dependecies
- nodejs=12.18.3-r0 \
+ nodejs=12.18.4-r0 \
  # unrar-cffi dependancy
  libffi=3.3-r2 \
  # Pillow dependencies
