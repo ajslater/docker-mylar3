@@ -1,17 +1,15 @@
 version: "3"
 services:
-    mylar:
-        env_file: env
-        build: .
-        image: ajslater/mylar3
-        container_name: mylar
-        ports:
-        - "8090:8090"
-        volumes:
-        - ./mylar/comics:/comics
-        - ./mylar/config:/config
-        - ./mylar/data:/data
-        - ./mylar/downloads:/downloads
-        env_file:
-        - env
-
+  mylar:
+    build: .
+    image: ajslater/mylar3
+    container_name: mylar
+    ports:
+      - "8090:8090"
+    volumes:
+      - ./mylar/comics:/comics
+      - ./mylar/config:/config
+      - ./mylar/data:/data
+      - ./mylar/downloads:/downloads
+    env_file:
+      - env
