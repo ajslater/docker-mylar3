@@ -1,4 +1,4 @@
 REPO=ajslater/mylar3
 IMAGE=ajslater/mylar3
-BASE_VERSION=python3.9.0-alpine3.12_0.3.0-2e2ed18
-PKG_VERSION=v0.4.6
+BASE_VERSION=python3.9.0-alpine3.12_0.3.1-cc7bb20
+PKG_VERSION=v0.4.7
