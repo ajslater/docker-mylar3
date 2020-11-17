@@ -1,6 +1,6 @@
 # UNMAINTAINED
 
-This repo is now unmaintained and will not update. It started out as one of the first mylar3 images, but it feels redundant now that linuxserver.io's has a good image.
+This repo is now unmaintained and will not update. It started out as one of the first mylar3 images, but it feels redundant now that linuxserver.io has a good image.
 
 I recommend the [linuxserver/mylar3 image](https://hub.docker.com/r/linuxserver/mylar3).
 
